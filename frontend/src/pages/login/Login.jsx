@@ -1,7 +1,7 @@
 const Login = () => {
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-      <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
+      <div className="w-full p-6 rounded-lg shadow-md bg-clip-padding backdrop-filter bg-slate-100 backdrop-blur-sm bg-opacity-10">
         <h1 className="text-3xl font-semibold text-center text-gray-300">
           Login{" "}
           <span className="bg-gradient-to-r from-cyan-600 to-blue-700 p-2 rounded-lg">
