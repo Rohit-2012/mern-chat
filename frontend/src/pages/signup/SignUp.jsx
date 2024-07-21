@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GenderCheckbox from "./GenderCheckbox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useSignUp from "../../hooks/useSignUp";
+import { useAuthContext } from "../../context/AuthContext";
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
@@ -11,6 +12,15 @@ const SignUp = () => {
     confirmPassword: "",
     gender: "",
   })
+  
+  const { authUser } = useAuthContext()
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    if (authUser) {
+      navigate('/')
+     }
+  }, [authUser, navigate])
 
   const {loading, signup} = useSignUp()
 
@@ -21,6 +31,10 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     await signup(inputs)
+  }
+
+  if (authUser) {
+    return null;
   }
 
   return (
@@ -94,8 +108,8 @@ const SignUp = () => {
             Already have an account?
           </Link>
           <div>
-            <button className="btn btn-block btn-sm mt-2 border border-slate-700">
-              Sign Up
+            <button className="btn btn-block btn-sm mt-2 border border-slate-700" disabled={loading}>
+              {loading ? <span className="loading loading-spinner"></span> : "Sign Up"}
             </button>
           </div>
         </form>
